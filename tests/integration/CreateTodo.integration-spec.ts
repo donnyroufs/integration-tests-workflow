@@ -44,5 +44,4 @@ describe("Create Todo", () => {
         expect(res.statusCode).toBe(400)
     })
   })
-
 })

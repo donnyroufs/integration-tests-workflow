@@ -1,8 +1,9 @@
 name: test
 
-on:
-  pull_request:
-    branches: [main]
+on: push
+
+env:
+  DATABASE_URL: postgresql://postgres:postgres@localhost:5432/todos?schema=public 
 
 jobs:
   test:
@@ -10,11 +11,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: install yarn
-        run: npm install -g yarn
-
-      - name: install dependencies
-        run: yarn
-
-      - name: run tests
-        run: yarn test
+      - name: tests 
+        run: docker-compose -f docker-compose.test.yml up --exit-code-from=test
+      
